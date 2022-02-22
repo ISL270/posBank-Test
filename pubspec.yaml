@@ -1,0 +1,38 @@
+name: bawq_test
+description: A new Flutter project.
+
+
+publish_to: 'none'
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  provider: ^6.0.2
+  image_picker: ^0.8.4+9
+  sqflite: ^2.0.0+4
+  path_provider: ^2.0.2
+  synchronized: ^3.0.0
+  sqlbrite: ^2.1.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^1.0.0
+
+
+flutter:
+  assets:
+    - assets/images/
+
+  uses-material-design: true
