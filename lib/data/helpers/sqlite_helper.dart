@@ -6,10 +6,10 @@ import 'package:synchronized/synchronized.dart';
 import 'package:bawq_test/data/models/note.dart';
 
 class SqliteHelper {
-  static const _databaseName = 'Notes.db';
+  static const _databaseName = 'NotesTest.db';
   static const _databaseVersion = 1;
   static const notesTable = 'Notes';
-  static const noteId = 'noteId';
+  static const noteId = 'id';
 
   static late BriteDatabase _streamDatabase;
 
@@ -23,7 +23,7 @@ class SqliteHelper {
     await db.execute('''
         CREATE TABLE $notesTable (
           $noteId INTEGER PRIMARY KEY,
-          note TEXT
+          text TEXT
         )
         ''');
   }
@@ -66,8 +66,8 @@ class SqliteHelper {
 
   Future<List<Note>> getAllNotes() async {
     final db = await instance.streamDatabase;
-    final recipeList = await db.query(notesTable);
-    final recipes = parseRecipes(recipeList);
+    final notesList = await db.query(notesTable);
+    final recipes = parseRecipes(notesList);
     return recipes;
   }
 

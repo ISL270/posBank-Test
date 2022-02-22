@@ -6,6 +6,7 @@ import 'package:bawq_test/utils/globals.dart';
 import 'package:bawq_test/data/repositories/sqlite_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'data/providers/mode_provider.dart';
 import 'data/repositories/notes_repo.dart';
 
 Future<void> main() async {
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
           lazy: false,
           create: (_) => repository,
           dispose: (_, NotesRepository repository) => repository.close(),
-        )
+        ),
+        ChangeNotifierProvider(create: (context) => ModeProvider())
       ],
       child: MaterialApp(
         scaffoldMessengerKey: snackbarKey,
