@@ -8,5 +8,10 @@ class NotesAPI {
         path: 'notes/getall',
       );
 
-  Uri addNote() => Uri();
+  Uri addNoteUri() => Uri(
+        scheme: 'http',
+        host: _host,
+        port: 55886,
+        path: 'notes/insert',
+      );
 }

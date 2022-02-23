@@ -1,5 +1,7 @@
+import 'package:bawq_test/data/repositories/sqlite_repo.dart';
+import 'package:bawq_test/data/repositories/api_repo.dart';
 import 'package:bawq_test/data/models/note.dart';
-import 'package:bawq_test/data/repositories/notes_repo.dart';
+import 'package:bawq_test/data/providers/mode_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../utils/globals.dart';
@@ -16,7 +18,9 @@ class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final repository = Provider.of<NotesRepository>(context);
+    final modeProvider = Provider.of<ModeProvider>(context);
+    final sqlRepo = Provider.of<SqliteRepository>(context);
+    final apiRepo = Provider.of<APIrepository>(context);
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 30,
@@ -45,7 +49,7 @@ class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
                 height: 20,
               ),
               ElevatedButton(
-                onPressed: () => onPressed(repository),
+                onPressed: () => onPressed(apiRepo, sqlRepo, modeProvider),
                 child: const Text(
                   'Add',
                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -63,10 +67,11 @@ class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
     );
   }
 
-  void onPressed(NotesRepository repository) {
+  void onPressed(APIrepository api, SqliteRepository repository,
+      ModeProvider modeProvider) {
     if (_note != null && _note!.isNotEmpty) {
       Note note = Note(_note);
-      repository.addNote(note);
+      modeProvider.useSQLite ? repository.addNote(note) : api.addNote(note);
       Navigator.pop(context);
     } else {
       snackbarKey.currentState?.showSnackBar(SnackBar(

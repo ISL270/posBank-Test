@@ -6,9 +6,9 @@ import 'package:bawq_test/services/notes_api.dart';
 import 'package:bawq_test/utils/globals.dart';
 import 'package:flutter/material.dart';
 
-class APIhelper {
+class APIrepository {
   final NotesAPI notesAPI;
-  APIhelper(this.notesAPI);
+  APIrepository(this.notesAPI);
 
   List<Note> parseRecipes(List<dynamic> notesList) {
     final notes = <Note>[];
@@ -43,13 +43,17 @@ class APIhelper {
     return notes;
   }
 
-  // Stream<List<Note>> watchAllNotes() async* {
-  //   final db = await instance.streamDatabase;
-  //   yield* db.createQuery(notesTable).mapToList((row) => Note.fromJson(row));
-  // }
-
-  // Future<int> addNote(Note note) async {
-  //   final db = await instance.streamDatabase;
-  //   return db.insert(notesTable, note.toJson());
-  // }
+  Future addNote(Note note) async {
+    try {
+      await http.post(notesAPI.addNoteUri(),
+          headers: {"Content-Type": "application/json"},
+          body: json.encode(note.toJsonAPI()));
+    } on SocketException {
+      snackbarKey.currentState?.showSnackBar(
+          const SnackBar(content: Text("No Internet connection!")));
+    } on HttpException {
+      snackbarKey.currentState?.showSnackBar(
+          const SnackBar(content: Text("Couldn't find the requested data!")));
+    }
+  }
 }

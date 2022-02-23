@@ -1,1 +1,10 @@
 GET http://192.236.155.173:55886/notes/getall
+
+POST http://192.236.155.173:55886/notes/insert
+content-type: application/json
+
+{
+    "text": "Test Note",
+    "placeDateTime": "2022-02-22T21:38:24.0319748+00:00",
+    "userId": null
+}
