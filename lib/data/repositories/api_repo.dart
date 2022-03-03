@@ -10,7 +10,7 @@ class APIrepository {
   final NotesAPI notesAPI;
   APIrepository(this.notesAPI);
 
-  List<Note> parseRecipes(List<dynamic> notesList) {
+  List<Note> parseNotes(List<dynamic> notesList) {
     final notes = <Note>[];
     notesList.forEach((noteMap) {
       final note = Note.fromJson(noteMap);
@@ -25,7 +25,7 @@ class APIrepository {
       final response = await http.get(notesAPI.getAllNotesUri());
       final data = json.decode(response.body);
       if (data.isNotEmpty) {
-        notes = parseRecipes(data);
+        notes = parseNotes(data);
       } else {
         snackbarKey.currentState?.showSnackBar(
             const SnackBar(content: Text("There is no data to display.")));
