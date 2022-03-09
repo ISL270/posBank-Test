@@ -8,3 +8,11 @@
 <img src="https://visitor-badge.glitch.me/badge?page_id=ISL270.posBank-Test&right_color=red&left_text=visitors" /></h3>
 
 ## About
+This is a test assignement I did while applying for [**posBank**](https://www.posbank.com). I fetched and posted data to their custom API using the [**http**](https://pub.dev/packages/http) package. And also performed some CRUD operations in a local SQLite database using [**sqflite**](https://pub.dev/packages/sqflite) & [**sqlbrite**](https://pub.dev/packages/sqlbrite) packages.
+
+To test my ability to use device's native features and form validation, I made them a screen in which users input their inforamtion to be validated, and it also gives users the ability to add their picture either by choosing it from the device's gallery or by taking a new picture using the device's camera.
+
+## Preview
+<p align="center"> 
+<img src="/assets/preview.gif" alt="Logo" width="40%">
+</p>
